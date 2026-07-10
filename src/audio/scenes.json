@@ -1,0 +1,9 @@
+[
+  {"id": "hook", "file": "tts01.wav", "fallbackFrames": 120},
+  {"id": "countup", "file": "tts02.wav", "fallbackFrames": 210},
+  {"id": "map", "file": "tts03.wav", "fallbackFrames": 330},
+  {"id": "barrace", "file": "tts04.wav", "fallbackFrames": 330},
+  {"id": "gauge", "file": "tts05.wav", "fallbackFrames": 330},
+  {"id": "closure", "file": "tts06.wav", "fallbackFrames": 330},
+  {"id": "keyword", "file": "tts07.wav", "fallbackFrames": 300}
+]

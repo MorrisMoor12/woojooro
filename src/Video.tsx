@@ -1,6 +1,7 @@
 import React from "react";
-import {AbsoluteFill, Series} from "remotion";
+import {AbsoluteFill, Series, Audio, staticFile} from "remotion";
 import {tokens} from "./theme";
+import {RESOLVED_SCENES, TOTAL_FRAMES} from "./audio/narration";
 import {HookScene} from "./components/scenes/HookScene";
 import {CountUpScene} from "./components/scenes/CountUpScene";
 import {MetroMapScene} from "./components/scenes/MetroMapScene";
@@ -9,30 +10,35 @@ import {GaugeScene} from "./components/scenes/GaugeScene";
 import {ClosureGridScene} from "./components/scenes/ClosureGridScene";
 import {KeywordScene} from "./components/scenes/KeywordScene";
 
+const COMPONENTS: Record<string, React.FC> = {
+  hook: HookScene,
+  countup: CountUpScene,
+  map: MetroMapScene,
+  barrace: BarRaceScene,
+  gauge: GaugeScene,
+  closure: ClosureGridScene,
+  keyword: KeywordScene,
+};
+
+export {TOTAL_FRAMES};
+
 /**
- * 65s / 1950f @ 30fps. Scene durations mirror the narration timecode table.
+ * Scene order + per-scene length come from src/audio/narration.ts.
+ * Each scene carries its own narration clip (once dropped into public/audio/).
  */
-export const SCENES = [
-  {id: "hook", durationInFrames: 120, Comp: HookScene},
-  {id: "countup", durationInFrames: 210, Comp: CountUpScene},
-  {id: "map", durationInFrames: 330, Comp: MetroMapScene},
-  {id: "barrace", durationInFrames: 330, Comp: BarRaceScene},
-  {id: "gauge", durationInFrames: 330, Comp: GaugeScene},
-  {id: "closure", durationInFrames: 330, Comp: ClosureGridScene},
-  {id: "keyword", durationInFrames: 300, Comp: KeywordScene},
-] as const;
-
-export const TOTAL_FRAMES = SCENES.reduce((n, s) => n + s.durationInFrames, 0);
-
 export const Video: React.FC = () => {
   return (
     <AbsoluteFill style={{backgroundColor: tokens.bgCanvas}}>
       <Series>
-        {SCENES.map(({id, durationInFrames, Comp}) => (
-          <Series.Sequence key={id} durationInFrames={durationInFrames}>
-            <Comp />
-          </Series.Sequence>
-        ))}
+        {RESOLVED_SCENES.map((s) => {
+          const Comp = COMPONENTS[s.id];
+          return (
+            <Series.Sequence key={s.id} durationInFrames={s.durationInFrames}>
+              <Comp />
+              {s.hasAudio ? <Audio src={staticFile(`audio/${s.file}`)} /> : null}
+            </Series.Sequence>
+          );
+        })}
       </Series>
     </AbsoluteFill>
   );

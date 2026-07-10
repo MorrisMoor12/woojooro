@@ -7,6 +7,7 @@
     "dev": "remotion studio",
     "render": "remotion render ShortsSelfEmployed out/shorts.mp4",
     "still": "remotion still ShortsSelfEmployed out/frame.png --frame=200",
+    "measure-audio": "node scripts/measure-audio.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

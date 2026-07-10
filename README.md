@@ -11,11 +11,26 @@
 
 ```bash
 npm install
-npm run dev        # Remotion Studio (미리보기 · 편집)
-npm run render     # out/shorts.mp4 로 렌더
-npm run still      # out/frame.png (200프레임 스틸)
-npm run typecheck  # 타입 검사
+npm run dev            # Remotion Studio (미리보기 · 편집)
+npm run render         # out/shorts.mp4 로 렌더
+npm run still          # out/frame.png (200프레임 스틸)
+npm run measure-audio  # public/audio/ 나레이션 길이 측정 → 씬 길이 자동 조정
+npm run typecheck      # 타입 검사
 ```
+
+## 나레이션 오디오 (씬별 드롭인)
+
+씬별 TTS 파일을 `public/audio/` 에 넣으면 각 씬에 자동으로 붙고, 씬 길이가
+발화 길이에 맞춰집니다. 파일이 없으면 무음으로 렌더됩니다.
+
+1. `public/audio/tts01.wav … tts07.wav` 배치 (매핑은 `public/audio/README.md`)
+2. `npm run measure-audio` — 각 클립 길이를 재서 `src/audio/manifest.json` 생성,
+   씬 길이 = `ceil(발화초 × 30) + 12프레임`(끝 여백)
+3. `npm run dev` 로 싱크 확인 → `npm run render`
+
+- 오디오 배선: `src/Video.tsx` 가 각 `<Series.Sequence>` 에 `<Audio>` 를 붙임
+- 타이밍 소스: `src/audio/scenes.json`(순서·파일명·fallback) + `manifest.json`(측정값)
+- 파일명을 바꾸려면 `scenes.json` 의 `file` 값만 수정
 
 ## 디자인 시스템 적용
 
@@ -34,9 +49,10 @@ npm run typecheck  # 타입 검사
 ```
 src/
 ├─ index.ts / Root.tsx     # Composition 등록 (9:16, 30fps)
-├─ Video.tsx               # Series 7씬 타임라인 (+ 총 프레임 계산)
+├─ Video.tsx               # Series 7씬 타임라인 + 씬별 <Audio>
 ├─ theme.ts                # 디자인 토큰 (모든 hex의 단일 출처)
 ├─ fonts.ts                # Poppins / Lora 로드
+├─ audio/                  # 나레이션 배선 (scenes.json · manifest.json · narration.ts)
 ├─ data/metrics.ts         # 숫자 · 출처 (시각화와 분리)
 ├─ util/format.ts          # 원화(억/만) · % 포맷터
 ├─ layout/SafeArea.tsx     # 상단 자막 / 중앙 시각화 / 하단 출처 3분할
