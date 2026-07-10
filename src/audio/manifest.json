@@ -1,1 +1,27 @@
-{}
+{
+  "hook": {
+    "file": "tts01.wav",
+    "durationSec": 5.17,
+    "durationInFrames": 168
+  },
+  "countup": {
+    "file": "tts02.wav",
+    "durationSec": 6.69,
+    "durationInFrames": 213
+  },
+  "map": {
+    "file": "tts03.wav",
+    "durationSec": 13.25,
+    "durationInFrames": 410
+  },
+  "barrace": {
+    "file": "tts04.wav",
+    "durationSec": 11.17,
+    "durationInFrames": 348
+  },
+  "gauge": {
+    "file": "tts05.wav",
+    "durationSec": 11.25,
+    "durationInFrames": 350
+  }
+}
