@@ -2,6 +2,7 @@ import React from "react";
 import {AbsoluteFill, Series, Audio, staticFile} from "remotion";
 import {tokens} from "./theme";
 import {RESOLVED_SCENES, TOTAL_FRAMES} from "./audio/narration";
+import {Bgm} from "./components/Bgm";
 import {HookScene} from "./components/scenes/HookScene";
 import {CountUpScene} from "./components/scenes/CountUpScene";
 import {MetroMapScene} from "./components/scenes/MetroMapScene";
@@ -29,6 +30,7 @@ export {TOTAL_FRAMES};
 export const Video: React.FC = () => {
   return (
     <AbsoluteFill style={{backgroundColor: tokens.bgCanvas}}>
+      <Bgm />
       <Series>
         {RESOLVED_SCENES.map((s) => {
           const Comp = COMPONENTS[s.id];
