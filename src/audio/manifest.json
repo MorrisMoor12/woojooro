@@ -23,5 +23,15 @@
     "file": "tts05.wav",
     "durationSec": 11.25,
     "durationInFrames": 350
+  },
+  "closure": {
+    "file": "tts06.wav",
+    "durationSec": 8.57,
+    "durationInFrames": 270
+  },
+  "keyword": {
+    "file": "tts07.wav",
+    "durationSec": 19.49,
+    "durationInFrames": 597
   }
 }
