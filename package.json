@@ -1,0 +1,23 @@
+{
+  "name": "seoul-metro-self-employed-shorts",
+  "version": "1.0.0",
+  "description": "9:16 Remotion shorts on Seoul metropolitan self-employed data, built with the Claude design system",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render ShortsSelfEmployed out/shorts.mp4",
+    "still": "remotion still ShortsSelfEmployed out/frame.png --frame=200",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "4.0.290",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.290",
+    "@types/react": "19.0.0",
+    "typescript": "5.6.3"
+  }
+}
